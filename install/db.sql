@@ -13,7 +13,7 @@ CREATE TABLE `links` (
   `short` varchar(50) COLLATE utf8mb3_spanish_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT (now()),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 CREATE TABLE `settings` (
   `st_sitename` varchar(150) CHARACTER SET utf8mb4 COLLATE utf8mb4_spanish_ci DEFAULT NULL,
@@ -39,7 +39,7 @@ CREATE TABLE `telemetry` (
   `access_time` datetime NOT NULL,
   `referer` varchar(512) COLLATE utf8mb3_spanish_ci DEFAULT 'Direct',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 CREATE TABLE `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
@@ -51,7 +51,7 @@ CREATE TABLE `users` (
   `user_updated` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `user_created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_spanish_ci;
 
 INSERT INTO `users` (user_id, user_name, user_email, user_password, user_role, user_status, user_updated, user_created) VALUES ('1', 'superadmin', 'superadmin@admin.com', 'SFU0SkJ0YUlCc1dURVZFZCt5blNKQT09', '0', '1', '2024-07-07 17:52:46', '2024-07-07 17:16:51');
 INSERT INTO `users` (user_id, user_name, user_email, user_password, user_role, user_status, user_updated, user_created) VALUES ('2', 'admin', 'admin@admin.com', 'S0VNV1lxa25wNW11N2JvS1lyS1BGUT09', '1', '1', '2024-07-07 21:56:58', '2024-07-07 15:41:13');
