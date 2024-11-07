@@ -2,15 +2,8 @@
 
 require_once "../../core.php";
 
-if (empty($_SESSION['user_id'])) {
-  header("Location: " . APP_URL . "/admin/controllers/login.php");
-  exit();
-}
-
-if (!$accessControl->hasAccess([0, 1], $_SESSION['user_role'])) {
-  header("Location: " . APP_URL);
-  exit();
-}
+$accessControl->require_login(SITE_URL_ADMIN . "/controllers/login.php");
+$accessControl->check_access([1, 2], SITE_URL . "/404.php");
 
 $shot = $_GET["shot"];
 
