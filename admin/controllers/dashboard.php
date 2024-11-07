@@ -2,15 +2,8 @@
 
 require_once "../core.php";
 
-if (empty($_SESSION['user_id'])) {
-  header("Location: " . APP_URL . "/admin/controllers/login.php");
-  exit();
-}
-
-if (!$accessControl->hasAccess([0, 1], $_SESSION['user_role'])) {
-  header("Location: " . APP_URL);
-  exit();
-}
+$accessControl->require_login(SITE_URL_ADMIN . "/controllers/login.php");
+$accessControl->check_access([1, 2], SITE_URL . "/404.php");
 
 // Consultas de datos
 $data_day   = [];
@@ -85,7 +78,5 @@ $visits = $stmt_visits->fetchAll(PDO::FETCH_OBJ);
 /* ========== Theme config ========= */
 $theme_title = "Dashboard";
 $theme_path  = "dashboard";
-// $theme_scripts = ["pages/dashboard.js"];
-// $theme_styles = ["pages/dashboard.css"];
 include BASE_DIR_ADMIN . "/views/dashboard.view.php";
 /* ================================= */

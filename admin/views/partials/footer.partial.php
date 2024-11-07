@@ -5,10 +5,9 @@
     <div class="row text-muted">
       <div class="col-6 text-start">
         <p class="mb-0">
+          <a class="text-muted" href="index.html"><strong><?= SITE_NAME ?></strong></a>
           &copy;
-          <a class="text-muted" href="<?= APP_URL ?>">
-            <strong><?= $pageinfo->st_sitename ?></strong>
-          </a>
+          <i>Admin dashboard</i>
         </p>
       </div>
       <div class="col-6 text-end">

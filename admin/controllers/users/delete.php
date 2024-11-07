@@ -2,19 +2,11 @@
 
 require_once "../../core.php";
 
-if (!isUserLoggedIn()) {
-  header('Location: ' . APP_URL . '/admin/controllers/login.php');
-  exit();
-}
-
-if (!$accessControl->hasAccess([0, 1], $_SESSION['user_role'])) {
-  header("Location: " . APP_URL . "/admin/controllers/dashboard.php");
-  exit();
-}
+$accessControl->check_access([1, 2]);
 
 // Comprobaciones
 if (!isset($_GET["id"]) || $_GET["id"] == "") {
-  add_message("Tienes que tener un id.", "danger");
+  $messageHandler->addMessage("Tienes que tener un id.", "danger");
   header("Location: list.php");
   exit();
 }
@@ -22,7 +14,7 @@ if (!isset($_GET["id"]) || $_GET["id"] == "") {
 $id = $encryption->decrypt($_GET["id"]);
 
 if (!is_numeric($id)) {
-  add_message("El id no encontrado.", "danger");
+  $messageHandler->addMessage("El id no encontrado.", "danger");
   header("Location: list.php");
   exit();
 }
@@ -34,7 +26,7 @@ $user = $stmt->fetch(PDO::FETCH_OBJ);
 
 
 if (empty($user)) {
-  add_message("Usuario no encontrado.", "danger");
+  $messageHandler->addMessage("Usuario no encontrado.", "danger");
   header("Location: list.php");
   exit();
 }
@@ -42,7 +34,7 @@ if (empty($user)) {
 $statement = $connect->prepare('DELETE FROM users WHERE user_id = :id');
 $statement->execute(array('id' => $id));
 
-add_message("Usuario eliminado correctamente.", "success");
+$messageHandler->addMessage("Usuario eliminado correctamente.", "success");
 header('Location: ' . $_SERVER['HTTP_REFERER']);
 exit();
 

@@ -1,9 +1,22 @@
 <?php
 
-/*--------------------------------------------------
-| Author       : Pirulug
-| Author URI   : https://github.com/pirulug
-----------------------------------------------------*/
+/*-------------------------------------------------------------------
+|
+|  _____ _            _             
+| |  __ (_)          | |            
+| | |__) | _ __ _   _| |_   _  __ _ 
+| |  ___/ | '__| | | | | | | |/ _` |
+| | |   | | |  | |_| | | |_| | (_| |
+| |_|   |_|_|   \__,_|_|\__,_|\__, |
+|                              __/ |
+|                             |___/ 
+|                                     
+| Author        : Pirulug
+| Author URI    : https://github.com/pirulug
+| Project       : PhpInstaller
+| Version       : 0.0.1
+| License       : MIT
+---------------------------------------------------------------------*/
 
 // Configuración de la base de datos
 const DB_HOST = "HOST_DB";
@@ -12,9 +25,11 @@ const DB_USER = "USER_DB";
 const DB_PASS = "PASS_DB";
 
 // Configuración de la aplicación
-const APP_NAME = "Start PHP";
-const APP_URL = "URL_WEB"; // Sin "/" al final de la url
+const SITE_NAME = "Start PHP";
+const SITE_URL = "URL_WEB"; // Sin "/" al final de la url
+const SITE_URL_ADMIN = SITE_URL . "/admin";
 
+// LENGTH HASH
 const LENGTH_HASH = 6;
 
 // Directorio Base

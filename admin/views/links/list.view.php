@@ -1,8 +1,6 @@
 <?php require BASE_DIR . "/admin/views/partials/top.partial.php"; ?>
 <?php require BASE_DIR . "/admin/views/partials/navbar.partial.php"; ?>
 
-<?php display_messages(); ?>
-
 <div class="card">
   <div class="card-body">
     <form method="GET" action="">
@@ -17,7 +15,7 @@
           <tr>
             <th>Titulo</th>
             <th>Link</th>
-            <th>Accion</th>
+            <th>Acción</th>
           </tr>
         </thead>
         <tbody>
@@ -26,7 +24,7 @@
               <td><?= $link->title ?></td>
               <td><?= $link->link ?></td>
               <td>
-                <a href="<?= APP_URL . "/" . $link->short ?>" class="btn btn-sm btn-info" target="_blank">
+                <a href="<?= SITE_URL . "/" . $link->short ?>" class="btn btn-sm btn-info" target="_blank">
                   <i class="fa fa-link"></i>
                 </a>
                 <a href="view.php?shot=<?= $link->short ?>" class="btn btn-sm btn-warning">

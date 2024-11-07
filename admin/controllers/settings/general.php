@@ -2,15 +2,8 @@
 
 require_once "../../core.php";
 
-if (!isUserLoggedIn()) {
-  header('Location: ' . APP_URL . '/admin/controllers/login.php');
-  exit();
-}
-
-if (!$accessControl->hasAccess([0], $_SESSION['user_role'])) {
-  header("Location: " . APP_URL . "/admin/controllers/dashboard.php");
-  exit();
-}
+$accessControl->require_login(SITE_URL_ADMIN . "/controllers/login.php");
+$accessControl->check_access([1], SITE_URL . "/404.php");
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $st_sitename    = cleardata($_POST['st_sitename']);
@@ -54,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $stmt->execute();
 
-  add_message('Se actualizo de manera correcta', 'success');
+  $messageHandler->addMessage('Se actualizo de manera correcta', 'success');
   header("Refresh:0");
   exit();
 }

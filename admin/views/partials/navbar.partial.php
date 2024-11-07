@@ -8,7 +8,7 @@ $menuItems = [
     'path'  => 'dashboard',
     'icon'  => 'sliders',
     'link'  => 'dashboard.php',
-    'roles' => [0, 1]
+    'roles' => [1, 2]
   ],
   [
     'title'     => 'Links',
@@ -36,19 +36,19 @@ $menuItems = [
     'path'      => 'users',
     'icon'      => 'users',
     'collapsed' => true,
-    'roles'     => [0, 1],
+    'roles'     => [1, 2],
     'items'     => [
       [
         'title' => 'Nuevo Usuario',
         'path'  => 'user-new',
         'link'  => 'users/new.php',
-        'roles' => [0, 1]
+        'roles' => [1, 2]
       ],
       [
         'title' => 'Lista de usuario',
         'path'  => 'user-list',
         'link'  => 'users/list.php',
-        'roles' => [0, 1]
+        'roles' => [1, 2]
       ],
     ]
   ],
@@ -57,19 +57,19 @@ $menuItems = [
     'path'      => 'settings',
     'icon'      => 'settings',
     'collapsed' => true,
-    'roles'     => [0],
+    'roles'     => [1],
     'items'     => [
       [
         'title' => 'General',
         'path'  => 'general',
         'link'  => 'settings/general.php',
-        'roles' => [0]
+        'roles' => [1]
       ],
       [
         'title' => 'Brand',
         'path'  => 'brand',
         'link'  => 'settings/brand.php',
-        'roles' => [0]
+        'roles' => [1]
       ],
     ]
   ],
@@ -81,7 +81,7 @@ $role = $_SESSION['user_role'];
 <nav class="sidebar js-sidebar" id="sidebar">
   <div class="sidebar-content js-simplebar">
     <a class="sidebar-brand" href="index.html">
-      <span class="sidebar-brand-text align-middle">AdminPiru</span>
+      <span class="sidebar-brand-text align-middle"><?= SITE_NAME ?></span>
     </a>
     <ul class="sidebar-nav">
       <?php foreach ($menuItems as $item): ?>
@@ -101,7 +101,7 @@ $role = $_SESSION['user_role'];
                   <?php if ($accessControl->hasAccess($subItem['roles'], $role)): // Verificar acceso a los sub ítems ?>
                     <li class="sidebar-item <?= $theme_path == $subItem['path'] ? "active" : "" ?>">
                       <a class="sidebar-link"
-                        href="<?= APP_URL . "/admin/controllers/" . $subItem['link'] ?>"><?= $subItem['title'] ?></a>
+                        href="<?= SITE_URL . "/admin/controllers/" . $subItem['link'] ?>"><?= $subItem['title'] ?></a>
                     </li>
                   <?php endif; ?>
                 <?php endforeach; ?>
@@ -109,7 +109,7 @@ $role = $_SESSION['user_role'];
             </li>
           <?php else: ?>
             <li class="sidebar-item <?= $theme_path == $item['path'] ? "active" : "" ?>">
-              <a class="sidebar-link" href="<?= APP_URL . "/admin/controllers/" . $item['link'] ?>">
+              <a class="sidebar-link" href="<?= SITE_URL . "/admin/controllers/" . $item['link'] ?>">
                 <i class="align-middle" data-feather="<?= $item['icon'] ?>"></i>
                 <span class="align-middle"><?= $item['title'] ?></span>
               </a>
@@ -130,7 +130,7 @@ $role = $_SESSION['user_role'];
     <div class="navbar-collapse collapse">
       <ul class="navbar-nav navbar-align">
         <li class="nav-item">
-          <a class="nav-link" href="<?= APP_URL ?>">
+          <a class="nav-link" href="<?= SITE_URL ?>">
             <i class="fa fa-eye"></i>
             Ver sitio
           </a>
@@ -181,25 +181,17 @@ $role = $_SESSION['user_role'];
             <span><?= $user_session->user_name ?></span>
           </a>
           <div class="dropdown-menu dropdown-menu-end">
-            <a class="dropdown-item" href="pages-profile.html">
+            <a class="dropdown-item" href="<?= SITE_URL ?>/admin/controllers/account/profile.php">
               <i class="align-middle me-1" data-feather="user"></i>
               Profile
             </a>
-            <a class="dropdown-item" href="#">
-              <i class="align-middle me-1" data-feather="pie-chart"></i>
-              Analytics
-            </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="pages-settings.html">
+            <a class="dropdown-item" href="<?= SITE_URL ?>/admin/controllers/account/settings.php">
               <i class="align-middle me-1" data-feather="settings"></i>
               Settings &amp; Privacy
             </a>
-            <a class="dropdown-item" href="#">
-              <i class="align-middle me-1" data-feather="help-circle"></i>
-              Help Center
-            </a>
             <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="<?= APP_URL ?>/admin/controllers/logout.php">
+            <a class="dropdown-item" href="<?= SITE_URL ?>/admin/controllers/logout.php">
               <i class="align-middle me-1" data-feather="log-out"></i>
               Log out
             </a>
@@ -213,3 +205,6 @@ $role = $_SESSION['user_role'];
     <div class="mb-3">
       <h1 class="h3 d-inline align-middle"><?= $theme_title ?? "" ?></h1>
     </div>
+
+    <!-- Mostrar los mensajes de Bootstrap -->
+    <?= $messageHandler->displayMessages(); ?>

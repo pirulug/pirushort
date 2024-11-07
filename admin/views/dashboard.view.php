@@ -1,5 +1,5 @@
 <?php blockStart("script"); ?>
-<script src="<?= APP_URL ?>/admin/assets/js/chartjs.js"></script>
+<script src="<?= SITE_URL ?>/admin/assets/js/chartjs.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const dataDay = <?php echo json_encode($data_day); ?>;
@@ -75,8 +75,6 @@
 
 <?php require BASE_DIR_ADMIN . "/views/partials/top.partial.php"; ?>
 <?php require BASE_DIR_ADMIN . "/views/partials/navbar.partial.php"; ?>
-
-<?php display_messages(); ?>
 
 <div class="row g-4">
   <div class="col-sm-6 col-xl-3">
@@ -200,7 +198,7 @@
             <tr>
               <td><?= $data->access_time ?></td>
               <td>
-                <small><?= APP_URL . "/" . $data->short_link ?></small>
+                <small><?= SITE_URL . "/" . $data->short_link ?></small>
               </td>
               <td><?= $data->device ?></td>
               <td><?= $data->operating_system ?></td>
@@ -216,8 +214,6 @@
     </div>
   </div>
 </div>
-
-
 
 <?php require BASE_DIR_ADMIN . "/views/partials/footer.partial.php"; ?>
 <?php require BASE_DIR_ADMIN . "/views/partials/bottom.partial.php"; ?>

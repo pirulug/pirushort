@@ -3,7 +3,7 @@
 <?php blockEnd("style"); ?>
 
 <?php blockStart("script"); // Block ?>
-<script src="<?= APP_URL ?>/admin/assets/js/chartjs.js"></script>
+<script src="<?= SITE_URL ?>/admin/assets/js/chartjs.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', function () {
     const dataDay = <?php echo json_encode($data_day); ?>;
@@ -79,8 +79,6 @@
 
 <?php require BASE_DIR . "/admin/views/partials/top.partial.php"; ?>
 <?php require BASE_DIR . "/admin/views/partials/navbar.partial.php"; ?>
-
-<?php display_messages(); ?>
 
 <div class="row">
   <div class="col-4">

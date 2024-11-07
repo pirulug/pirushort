@@ -2,15 +2,8 @@
 
 require_once "../../core.php";
 
-if (!isUserLoggedIn()) {
-  header('Location: ' . APP_URL . '/admin/controllers/login.php');
-  exit();
-}
-
-if (!$accessControl->hasAccess([0], $_SESSION['user_role'])) {
-  header("Location: " . APP_URL . "/admin/controllers/dashboard.php");
-  exit();
-}
+$accessControl->require_login(SITE_URL_ADMIN . "/controllers/login.php");
+$accessControl->check_access([1], SITE_URL . "/404.php");
 
 // Saber si existe el METHOD POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -31,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
   $statement->bindParam(':st_darklogo', $st_darklogo);
   $statement->execute();
 
-  add_message("Se actualizo las imagenes de manera correcta", "success");
+  $messageHandler->addMessage("Se actualizo las imagenes de manera correcta", "success");
   header('Location: ' . $_SERVER['HTTP_REFERER']);
   exit();
 }

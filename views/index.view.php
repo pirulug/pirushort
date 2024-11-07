@@ -1,13 +1,11 @@
 <?php require __DIR__ . "/partials/top.partial.php"; ?>
 <?php require __DIR__ . "/partials/navbar.partial.php"; ?>
 
-<?php display_messages(); ?>
-
 <div class="container">
-  <div class="page-header" id="banner">
+  <div class="dvh-100 d-flex justify-content-center align-items-center">
     <div class="text-center">
-      <h1 class="display-1">PiruUI</h1>
-      <p class="lead">Un estilo de Pirulug.</p>
+      <h1 class="display-1 fw-bold"><?= SITE_NAME ?></h1>
+      <p class="lead">Un sitio php para poder comenzar.</p>
     </div>
   </div>
 </div>

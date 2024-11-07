@@ -19,20 +19,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   // Validación del título
   if (empty($title)) {
-    add_message("El título no debe estar vacío.", "danger");
+    $messageHandler->addMessage("El título no debe estar vacío.", "danger");
   }
 
   // Validación del link
   if (empty($link)) {
-    add_message("El enlace no debe estar vacío.", "danger");
+    $messageHandler->addMessage("El enlace no debe estar vacío.", "danger");
   } elseif (!filter_var($link, FILTER_VALIDATE_URL)) {
-    add_message("El enlace no es válido. Por favor, ingresa una URL correcta.", "danger");
+    $messageHandler->addMessage("El enlace no es válido. Por favor, ingresa una URL correcta.", "danger");
   }
 
   // Enlace corto
   $short = getUniqueHash($connect);
 
-  if (!has_error_messages()) {
+  if (!$messageHandler->hasMessagesOfType('danger')) {
     $query = "INSERT INTO links (title, link, short) VALUES (:title, :link, :short)";
     $stmt  = $connect->prepare($query);
     $stmt->bindParam(":title", $title);
@@ -40,11 +40,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $stmt->bindParam(":short", $short);
 
     if ($stmt->execute()) {
-      add_message("El nuevo link se insertó correctamente.", "success");
+      $messageHandler->addMessage("El nuevo link se insertó correctamente.", "success");
       header("Location: list.php");
       exit();
     } else {
-      add_message("Hubo un error al intentar insertar el nuevo link.", "danger");
+      $messageHandler->addMessage("Hubo un error al intentar insertar el nuevo link.", "danger");
     }
   }
 }
