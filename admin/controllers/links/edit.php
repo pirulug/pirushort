@@ -19,7 +19,7 @@ if (!isset($_GET["id"]) || $_GET["id"] == "") {
   exit();
 }
 
-$id = decrypt($_GET["id"]);
+$id = $encryption->decrypt($_GET["id"]);
 
 // Comprobar si existe el link en la DB
 $query = "SELECT * FROM links WHERE id = $id";

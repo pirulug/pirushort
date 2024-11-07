@@ -3,17 +3,10 @@
 require_once "core.php";
 
 if (!isset($_GET["short"])) {
-  exit("id is not present in URL");
+  exit("ID is not present in URL");
 }
 
 $short = $_GET["short"];
-
-// Verifica si la URL corta tiene un "!" al final
-$showRawLink = false;
-if (substr($short, -1) === '!') {
-  $short       = rtrim($short, '!');
-  $showRawLink = true;
-}
 
 // Consulta para obtener el enlace original
 $query = "SELECT * FROM links WHERE short = :short";
@@ -24,14 +17,9 @@ $link = $stmt->fetch(PDO::FETCH_OBJ);
 
 // Verifica si el enlace existe
 if ($link) {
-  if ($showRawLink) {
-    // Muestra el enlace original en texto plano
-    header('Content-Type: text/plain');
-    echo $link->link;
-  } else {
-    // Redirige al enlace original
-    header("Location: $link->link");
-  }
+
+  // Redirige al enlace original
+  header("Location: $link->link");
 
   // Recoge la telemetría
   $userIp     = $_SERVER['REMOTE_ADDR']; // IP del usuario
@@ -39,8 +27,8 @@ if ($link) {
   $accessTime = date("Y-m-d H:i:s"); // Fecha y hora del acceso
   $referer    = $_SERVER['HTTP_REFERER'] ?? 'Direct'; // Página de referencia
 
-  // Obtener ubicación del usuario
-  $location = getLocation($userIp);
+  // Datos aproximados de localización (país y ciudad)
+  $location = getApproximateLocation($userIp);
 
   // Extraer detalles del agente de usuario
   $device  = getDeviceType($userAgent);
@@ -49,7 +37,7 @@ if ($link) {
 
   // Inserta los datos de telemetría en la base de datos
   $telemetryQuery = "INSERT INTO telemetry (short_link, ip_address, country, city, device, operating_system, browser, access_time, referer) 
-                     VALUES (:short, :ip, :country, :city, :device, :os, :browser, :time, :referer)";
+                       VALUES (:short, :ip, :country, :city, :device, :os, :browser, :time, :referer)";
   $telemetryStmt  = $connect->prepare($telemetryQuery);
   $telemetryStmt->bindParam(":short", $short);
   $telemetryStmt->bindParam(":ip", $userIp);
@@ -67,14 +55,12 @@ if ($link) {
   exit("Short link does not exist");
 }
 
-// Función para obtener la ubicación usando un servicio externo
-function getLocation($ip) {
-  $apiKey   = '74af64c73a9902'; // Reemplaza con tu API key
-  $response = file_get_contents("http://ipinfo.io/{$ip}/json?token={$apiKey}");
-  $data     = json_decode($response, true);
+// Función de ejemplo para obtener la ubicación aproximada sin servicios externos
+function getApproximateLocation($ip) {
+  // Aquí, podrías hacer una aproximación de localización según rangos de IP si cuentas con una base de datos local.
   return [
-    'country' => $data['country'] ?? 'Unknown',
-    'city'    => $data['city'] ?? 'Unknown'
+    'country' => 'Unknown',  // Reemplazar según tu base de datos de IPs
+    'city'    => 'Unknown'      // Reemplazar según tu base de datos de IPs
   ];
 }
 

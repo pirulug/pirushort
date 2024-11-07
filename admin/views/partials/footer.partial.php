@@ -12,20 +12,8 @@
         </p>
       </div>
       <div class="col-6 text-end">
-        <ul class="list-inline">
-          <li class="list-inline-item">
-            <a class="text-muted" href="<?= $pageinfo->st_facebook ?>" target="_blank">Facebook</a>
-          </li>
-          <li class="list-inline-item">
-            <a class="text-muted" href="<?= $pageinfo->st_twitter ?>" target="_blank">Twitter</a>
-          </li>
-          <li class="list-inline-item">
-            <a class="text-muted" href="<?= $pageinfo->st_instagram ?>" target="_blank">Instagram</a>
-          </li>
-          <li class="list-inline-item">
-            <a class="text-muted" href="<?= $pageinfo->st_youtube ?>" target="_blank">Youtube</a>
-          </li>
-        </ul>
+        <p class="mb-0">
+          Designed By&nbsp;<a class="text-muted" href="http://github.com/pirulug" target="_blank">Pirulug</a></p>
       </div>
     </div>
   </div>
